@@ -1,78 +1,78 @@
 package uiTest;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.WebDriverRunner;
 import dataSource.Highlighter;
 import dataSource.TestData;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.By;
-
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import pages.MailPage;
+import java.time.Duration;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
-import static com.codeborne.selenide.WebDriverRunner.addListener;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.WebDriverRunner.addListener;
 import static dataSource.Highlighter.highlight;
 
 
-public class YandexMail {
+public class YandexMail extends MailPage {
 
-    @Before
-    public  void setUp(){
+    @BeforeAll
+    public static void setUp(){
         Configuration.browser = "chrome";
-        Configuration.browserSize = "2100x1080";
         addListener(new Highlighter());
+        open(TestData.getStartURL());
+        WebDriverRunner.getWebDriver().manage().window().maximize();
+        income().click();
+        loginMail().setValue(TestData.getLoginMail()).pressEnter();
+        passMail().setValue(TestData.getPasswordMail()).pressEnter();
     }
 
     @Test
     public void visibleLoginAndImage(){
-        open("https://mail.yandex.ru/");
-        element(By.linkText("Войти")).click();
-        element(By.name("login")).setValue(TestData.getLoginMail()).pressEnter();
-        element(By.name("passwd")).setValue(TestData.getPasswordMail()).pressEnter();
-        highlight(element(By.className("user-pic__image")).shouldBe(visible));
-        highlight(element(By.className("user-account__name")).shouldHave(text(TestData.getLoginMail())));
+        highlight(element(userIMG().shouldBe(visible)));
+        highlight(element(loginTextIMG().shouldHave(text(TestData.getLoginMail()))));
     }
 
     @Test
     public void visibleElementLetters(){
-        element(byText("Входящие")).click();
-        elements(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']")).shouldHave(sizeGreaterThanOrEqual(1));
+        incomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
+        incomeMailTextVisible().shouldHave(sizeGreaterThanOrEqual(1));
     }
 
     @Test
     public void sendLetter(){
-        element(byText("Написать")).click();
-        element(byXpath("//div[@class='composeYabbles']")).setValue(TestData.getSendEmail());
-        element(byName("subject")).setValue(TestData.getTopic());
-        element(byXpath("//div[@class='cke_wysiwyg_div cke_reset cke_enable_context_menu cke_editable cke_editable_themed " +
-                "cke_contents_ltr cke_htmlplaceholder']")).setValue(TestData.getContent());
-        element(byXpath("//button[@class='Button2 Button2_pin_circle-circle Button2_view_default Button2_size_l']")).click();
-        element(byText("Отправленные")).click();
-        elements(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']"))
-                .filter(text(TestData.getTopic())).shouldBe(sizeGreaterThanOrEqual(1));
-        element(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']")).shouldHave(text(TestData.getTopic())).click();
-        element(byXpath("//div[@class='MessageBody_body_pmf3j react-message-wrapper__body']")).shouldHave(text(TestData.getContent()));
-
-
+        writeMail().click();
+        whomMail().setValue(TestData.getSendEmail());
+        topicNewMail().setValue(TestData.getTopic());
+        contantNewMail().setValue(TestData.getContent());
+        sendMail().click();
+        outcomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
+        outcomeTextMail().filter(text(TestData.getTopic())).shouldBe(sizeGreaterThanOrEqual(1));
+        checkTopicOutMail().shouldHave(text(TestData.getTopic())).click();
+        checkContentOutMail().shouldHave(text(TestData.getContent()));
     }
 
     @Test
     public void sendLetterMyself(){
-        element(byText("Написать")).click();
-        element(byXpath("//div[@class='composeYabbles']")).pressEnter().setValue(TestData.getMyEmail());
-        element(byName("subject")).setValue(TestData.getTopicMe());
-        element(byXpath("//div[@class='cke_wysiwyg_div cke_reset cke_enable_context_menu cke_editable cke_editable_themed " +
-                "cke_contents_ltr cke_htmlplaceholder']")).setValue(TestData.getContentMe());
-        element(byXpath("//button[@class='Button2 Button2_pin_circle-circle Button2_view_default Button2_size_l']")).click();
-        element(byText("Отправленные")).click();
-        elements(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']"))
-                .filter(text(TestData.getTopicMe())).shouldBe(sizeGreaterThanOrEqual(1));
-        element(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']")).shouldHave(text(TestData.getTopicMe())).click();
-        element(byXpath("//div[@class='MessageBody_body_pmf3j react-message-wrapper__body']")).shouldHave(text(TestData.getContentMe()));
-        element(byText("Входящие")).click();
-        element(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']")).shouldHave(text(TestData.getTopicMe())).click();
-        element(byXpath("//div[@class='MessageBody_body_pmf3j react-message-wrapper__body']")).shouldHave(text(TestData.getContentMe()));
+        writeMail().click();
+        whomMail().setValue(TestData.getMyEmail());
+        topicNewMail().setValue(TestData.getTopicMe());
+        contantNewMail().setValue(TestData.getContentMe());
+        sendMail().click();
+        outcomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
+        outcomeTextMail().filter(text(TestData.getTopicMe())).shouldBe(sizeGreaterThanOrEqual(1));
+        checkTopicOutMail().shouldHave(text(TestData.getTopicMe())).click();
+        checkContentOutMail().shouldHave(text(TestData.getContentMe()));
+        incomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
+        checkTopicIncomeMail().shouldHave(text(TestData.getTopicMe())).click();
+        checkContentIncomeMail().shouldHave(text(TestData.getContentMe()));
+    }
+
+    @AfterAll
+    public  static void close(){
+        WebDriverRunner.closeWebDriver();
     }
 
 

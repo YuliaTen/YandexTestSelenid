@@ -1,16 +1,21 @@
 package dataSource;
 
+import pages.MailPage;
+
+import static com.codeborne.selenide.Selenide.open;
+
 public class TestData {
     static final String LOGIN = "eXVsaWF0ZXN0aXJvdmE";
     static final String PASS = "QXNkTGtqVmJuLTUxMA";
-    static String loginMail = Base64.decode(LOGIN);   //"yuliatestirova";
-    static String passwordMail = Base64.decode(PASS);  //"AsdLkjVbn-510";
-    static String sendEmail = "teenager111@yandex.ru";
-    static String myEmail = "yuliatestirova@yandex.ru";
-    static String content = "тестовое  тело письма";
-    static String topic = "Тестовое письмо";
-    static String contentMe = "тестовое тело письма себе";
-    static String topicMe = "Тестовое письмо себе";
+    private static String loginMail = Base64.decode(LOGIN);
+    private static String passwordMail = Base64.decode(PASS);
+    private static String sendEmail = "teenager111@yandex.ru";
+    private static String myEmail = "yuliatestirova@yandex.ru";
+    private static String content = "тестовое  тело письма";
+    private static String topic = "Тестовое письмо";
+    private static String contentMe = "тестовое тело письма себе";
+    private static String topicMe = "Тестовое письмо себе";
+    private static String  startURL = "https://mail.yandex.ru/";
 
     public static String getContentMe() {
         return contentMe;
@@ -32,17 +37,11 @@ public class TestData {
         return loginMail;
     }
 
-    public static void setLoginMail(String loginMail) {
-        TestData.loginMail = loginMail;
-    }
 
     public static String getPasswordMail() {
         return passwordMail;
     }
 
-    public static void setPasswordMail(String passwordMail) {
-        TestData.passwordMail = passwordMail;
-    }
 
     public static String getSendEmail() {
         return sendEmail;
@@ -75,4 +74,13 @@ public class TestData {
     public static void setTopic(String topic) {
         TestData.topic = topic;
     }
+
+    public static String getStartURL() {
+        return startURL;
+    }
+
+    public static void setStartURL(String startURL) {
+        TestData.startURL = startURL;
+    }
+
 }
