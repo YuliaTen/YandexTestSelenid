@@ -1,14 +1,10 @@
 package dataSource;
 
-import pages.MailPage;
-
-import static com.codeborne.selenide.Selenide.open;
+import io.qameta.allure.Step;
 
 public class TestData {
-    static final String LOGIN = "eXVsaWF0ZXN0aXJvdmE";
-    static final String PASS = "QXNkTGtqVmJuLTUxMA";
-    private static String loginMail = Base64.decode(LOGIN);
-    private static String passwordMail = Base64.decode(PASS);
+    private static String loginMail = Base64.decode(ConfProperties.getProperty("LOGIN"));
+    private static String passwordMail = Base64.decode(ConfProperties.getProperty("PASS"));
     private static String sendEmail = "teenager111@yandex.ru";
     private static String myEmail = "yuliatestirova@yandex.ru";
     private static String content = "тестовое  тело письма";
@@ -17,6 +13,7 @@ public class TestData {
     private static String topicMe = "Тестовое письмо себе";
     private static String  startURL = "https://mail.yandex.ru/";
 
+    @Step("Получение тела письма себе")
     public static String getContentMe() {
         return contentMe;
     }
@@ -25,6 +22,7 @@ public class TestData {
         TestData.contentMe = contentMe;
     }
 
+    @Step("Получение темы письма себе")
     public static String getTopicMe() {
         return topicMe;
     }
@@ -33,16 +31,17 @@ public class TestData {
         TestData.topicMe = topicMe;
     }
 
+    @Step("Получение логина")
     public static String getLoginMail() {
         return loginMail;
     }
 
-
+    @Step("Получение пароля")
     public static String getPasswordMail() {
         return passwordMail;
     }
 
-
+    @Step("Получение адреса e-mail")
     public static String getSendEmail() {
         return sendEmail;
     }
@@ -51,6 +50,7 @@ public class TestData {
         TestData.sendEmail = sendEmail;
     }
 
+    @Step("Получение адреса своей почты")
     public static String getMyEmail() {
         return myEmail;
     }
@@ -59,6 +59,7 @@ public class TestData {
         TestData.myEmail = myEmail;
     }
 
+    @Step("Получение тела письма")
     public static String getContent() {
         return content;
     }
@@ -67,6 +68,7 @@ public class TestData {
         TestData.content = content;
     }
 
+    @Step("Получение темы письма")
     public static String getTopic() {
         return topic;
     }
@@ -75,12 +77,18 @@ public class TestData {
         TestData.topic = topic;
     }
 
+    @Step("Получение стартовой страницы")
     public static String getStartURL() {
         return startURL;
     }
 
-    public static void setStartURL(String startURL) {
-        TestData.startURL = startURL;
+    @Step("Явное ожидание")
+    public static void waiting(long mlSec){
+        try {
+            Thread.sleep(mlSec);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 }
