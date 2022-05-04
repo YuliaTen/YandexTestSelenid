@@ -1,14 +1,19 @@
-package dataSource;
+package Utils;
 
 import io.qameta.allure.Step;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TestData {
     private static String loginMail = Base64.decode(ConfProperties.getProperty("LOGIN"));
     private static String passwordMail = Base64.decode(ConfProperties.getProperty("PASS"));
-    private static String sendEmail = "teenager111@yandex.ru";
+    private  static DBConnect dbConnect = new DBConnect();
+    private  static Letters letter = dbConnect.getDataLetter();
+    private  static String sendEmail = letter.reciver;
     private static String myEmail = "yuliatestirova@yandex.ru";
-    private static String content = "тестовое  тело письма";
-    private static String topic = "Тестовое письмо";
+    private  static String content = letter.context;
+    private  static String topic = letter.subject;
     private static String contentMe = "тестовое тело письма себе";
     private static String topicMe = "Тестовое письмо себе";
     private static String  startURL = "https://mail.yandex.ru/";
@@ -36,18 +41,15 @@ public class TestData {
         return loginMail;
     }
 
-    @Step("Получение пароля")
+
     public static String getPasswordMail() {
         return passwordMail;
     }
 
     @Step("Получение адреса e-mail")
     public static String getSendEmail() {
-        return sendEmail;
-    }
 
-    public static void setSendEmail(String sendEmail) {
-        TestData.sendEmail = sendEmail;
+        return sendEmail;
     }
 
     @Step("Получение адреса своей почты")
@@ -64,25 +66,17 @@ public class TestData {
         return content;
     }
 
-    public static void setContent(String content) {
-        TestData.content = content;
-    }
-
     @Step("Получение темы письма")
     public static String getTopic() {
-        return topic;
+        return topic ;
     }
 
-    public static void setTopic(String topic) {
-        TestData.topic = topic;
-    }
 
-    @Step("Получение стартовой страницы")
     public static String getStartURL() {
         return startURL;
     }
 
-    @Step("Явное ожидание")
+
     public static void waiting(long mlSec){
         try {
             Thread.sleep(mlSec);
@@ -90,5 +84,14 @@ public class TestData {
             System.out.println(e);
         }
     }
+
+    @Step("Получение текущей даты и времени")
+    public static String dateTime(){
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String date = dateTime.format(formatter);
+        return date;
+    }
+
 
 }

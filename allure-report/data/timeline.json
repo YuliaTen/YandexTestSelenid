@@ -1,0 +1,153 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "DESKTOP-RMAJ2E4",
+    "children" : [ {
+      "name" : "12852@DESKTOP-RMAJ2E4.main(1)",
+      "children" : [ {
+        "name" : "Проверка отображения иконки пользователя и логина",
+        "uid" : "ae9dead3fbbb7a89",
+        "parentUid" : "ecec78dc91c9b52eba6a18943b250a21",
+        "status" : "passed",
+        "time" : {
+          "start" : 1651327169563,
+          "stop" : 1651327174867,
+          "duration" : 5304
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 1,
+        "retriesStatusChange" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Отправка письма себе",
+        "uid" : "d5c1075079178ab9",
+        "parentUid" : "ecec78dc91c9b52eba6a18943b250a21",
+        "status" : "passed",
+        "time" : {
+          "start" : 1651327176286,
+          "stop" : 1651327191854,
+          "duration" : 15568
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 1,
+        "retriesStatusChange" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Отправка письма другому человеку",
+        "uid" : "f454f257f057bcbe",
+        "parentUid" : "ecec78dc91c9b52eba6a18943b250a21",
+        "status" : "passed",
+        "time" : {
+          "start" : 1651327191919,
+          "stop" : 1651327202451,
+          "duration" : 10532
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 1,
+        "retriesStatusChange" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Проверка видимости писем",
+        "uid" : "b2da07a51f92e4af",
+        "parentUid" : "ecec78dc91c9b52eba6a18943b250a21",
+        "status" : "passed",
+        "time" : {
+          "start" : 1651327175042,
+          "stop" : 1651327176260,
+          "duration" : 1218
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 1,
+        "retriesStatusChange" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "ecec78dc91c9b52eba6a18943b250a21"
+    }, {
+      "name" : "17796@DESKTOP-RMAJ2E4.main(1)",
+      "children" : [ {
+        "name" : "Отправка письма другому человеку",
+        "uid" : "6729945992be89b9",
+        "parentUid" : "b4e44c5af1eea9d312a90f808dc2b526",
+        "status" : "passed",
+        "time" : {
+          "start" : 1651327066045,
+          "stop" : 1651327076243,
+          "duration" : 10198
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 0,
+        "retriesStatusChange" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Отправка письма себе",
+        "uid" : "66375ce7a7da2523",
+        "parentUid" : "b4e44c5af1eea9d312a90f808dc2b526",
+        "status" : "passed",
+        "time" : {
+          "start" : 1651327048433,
+          "stop" : 1651327065931,
+          "duration" : 17498
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 0,
+        "retriesStatusChange" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Проверка видимости писем",
+        "uid" : "d93a01963f108763",
+        "parentUid" : "b4e44c5af1eea9d312a90f808dc2b526",
+        "status" : "passed",
+        "time" : {
+          "start" : 1651327047408,
+          "stop" : 1651327048373,
+          "duration" : 965
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 0,
+        "retriesStatusChange" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Проверка отображения иконки пользователя и логина",
+        "uid" : "2749de3329213260",
+        "parentUid" : "b4e44c5af1eea9d312a90f808dc2b526",
+        "status" : "passed",
+        "time" : {
+          "start" : 1651327041223,
+          "stop" : 1651327047288,
+          "duration" : 6065
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "newPassed" : false,
+        "newBroken" : false,
+        "retriesCount" : 0,
+        "retriesStatusChange" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "b4e44c5af1eea9d312a90f808dc2b526"
+    } ],
+    "uid" : "f7df1f42987065af89540774be848a39"
+  } ]
+}

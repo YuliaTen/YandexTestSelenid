@@ -2,8 +2,8 @@ package uiTest;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
-import dataSource.Highlighter;
-import dataSource.TestData;
+import Utils.Highlighter;
+import Utils.TestData;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +14,7 @@ import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.WebDriverRunner.addListener;
-import static dataSource.Highlighter.highlight;
+import static Utils.Highlighter.highlight;
 
 @DisplayName("UI тесты для проверки работы Яндекс почты")
 public class YandexMail extends MailPage {
@@ -48,33 +48,22 @@ public class YandexMail extends MailPage {
     @Test
     @DisplayName("Отправка письма другому человеку")
     void sendLetter(){
-        writeMail().click();
-        whomMail().setValue(TestData.getSendEmail());
-        topicNewMail().setValue(TestData.getTopic());
-        contantNewMail().setValue(TestData.getContent());
-        sendMail().click();
-        TestData.waiting(3000);
-        outcomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
-        outcomeTextMail().filter(text(TestData.getTopic())).shouldBe(sizeGreaterThanOrEqual(1));
-        checkTopicOutMail().shouldHave(text(TestData.getTopic())).click();
+        String topicDate = writeLetter(TestData.getSendEmail(),TestData.getTopic(),TestData.getContent());
+        outcomeTextMail().filter(text(topicDate)).shouldBe(sizeGreaterThanOrEqual(1));
+        checkTopicOutMail().shouldHave(text(topicDate)).click();
         checkContentOutMail().shouldHave(text(TestData.getContent()));
     }
 
     @Test
     @DisplayName("Отправка письма себе")
     void sendLetterMyself(){
-        writeMail().click();
-        whomMail().setValue(TestData.getMyEmail());
-        topicNewMail().setValue(TestData.getTopicMe());
-        contantNewMail().setValue(TestData.getContentMe());
-        sendMail().click();
-        TestData.waiting(3000);
-        outcomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
-        outcomeTextMail().filter(text(TestData.getTopicMe())).shouldBe(sizeGreaterThanOrEqual(1));
-        checkTopicOutMail().shouldHave(text(TestData.getTopicMe())).click();
+        String topicDate = writeLetter(TestData.getMyEmail(),TestData.getTopicMe(),TestData.getContentMe());
+        outcomeTextMail().filter(text(topicDate)).shouldBe(sizeGreaterThanOrEqual(1));
+        checkTopicOutMail().shouldHave(text(topicDate)).click();
         checkContentOutMail().shouldHave(text(TestData.getContentMe()));
+        newMail().click();
         incomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
-        checkTopicIncomeMail().shouldHave(text(TestData.getTopicMe())).click();
+        checkTopicIncomeMail().shouldHave(text(topicDate)).click();
         checkContentIncomeMail().shouldHave(text(TestData.getContentMe()));
     }
 

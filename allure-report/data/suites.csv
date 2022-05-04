@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sat Apr 30 16:59:29 MSK 2022","Sat Apr 30 16:59:34 MSK 2022","5304","","UI тесты для проверки работы Яндекс почты","","uiTest.YandexMail","visibleLoginAndImage","Проверка отображения иконки пользователя и логина",""
+"passed","Sat Apr 30 16:59:51 MSK 2022","Sat Apr 30 17:00:02 MSK 2022","10532","","UI тесты для проверки работы Яндекс почты","","uiTest.YandexMail","sendLetter","Отправка письма другому человеку",""
+"passed","Sat Apr 30 16:59:36 MSK 2022","Sat Apr 30 16:59:51 MSK 2022","15568","","UI тесты для проверки работы Яндекс почты","","uiTest.YandexMail","sendLetterMyself","Отправка письма себе",""
+"passed","Sat Apr 30 16:59:35 MSK 2022","Sat Apr 30 16:59:36 MSK 2022","1218","","UI тесты для проверки работы Яндекс почты","","uiTest.YandexMail","visibleElementLetters","Проверка видимости писем",""

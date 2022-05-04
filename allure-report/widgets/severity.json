@@ -1,0 +1,41 @@
+[ {
+  "uid" : "ae9dead3fbbb7a89",
+  "name" : "Проверка отображения иконки пользователя и логина",
+  "time" : {
+    "start" : 1651327169563,
+    "stop" : 1651327174867,
+    "duration" : 5304
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "b2da07a51f92e4af",
+  "name" : "Проверка видимости писем",
+  "time" : {
+    "start" : 1651327175042,
+    "stop" : 1651327176260,
+    "duration" : 1218
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d5c1075079178ab9",
+  "name" : "Отправка письма себе",
+  "time" : {
+    "start" : 1651327176286,
+    "stop" : 1651327191854,
+    "duration" : 15568
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f454f257f057bcbe",
+  "name" : "Отправка письма другому человеку",
+  "time" : {
+    "start" : 1651327191919,
+    "stop" : 1651327202451,
+    "duration" : 10532
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]
