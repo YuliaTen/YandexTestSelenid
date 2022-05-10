@@ -1,125 +1,99 @@
 package pages;
 
+import utils.Letters;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import Utils.TestData;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-
 import java.time.Duration;
-
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selectors.*;
 
+// PageObject для страницы почты
 public class MailPage {
 
-
-    public static SelenideElement income() {
-        return  $(By.linkText("Войти"));
+    public SelenideElement income() {
+        return $(By.linkText("Войти"));
     }
 
-
-    public static SelenideElement loginMail() {
-        return  $(By.name("login"));
+    public SelenideElement loginMail() {
+        return $(By.name("login"));
     }
 
-
-    public static SelenideElement passMail() {
-        return  $(By.name("passwd"));
+    public SelenideElement passMail() {
+        return $(By.name("passwd"));
     }
 
     @Step("Проверка иконки пользователя")
-    public static SelenideElement userIMG() {
-        return  $(By.className("user-pic__image"));
+    public SelenideElement userIMG() {
+        return $(By.className("user-pic__image"));
     }
 
     @Step("Проверка логина внутри почты")
-    public static SelenideElement loginTextIMG() {
-        return  $(By.className("user-account__name"));
+    public SelenideElement loginTextIMG() {
+        return $(By.className("user-account__name"));
     }
 
     @Step("Входящие письма")
-    public static SelenideElement incomeMail() {
-        return  $(byText("Входящие"));
+    public SelenideElement incomeMail() {
+        return $x("//a[@href='#tabs/relevant']");
     }
 
     @Step("Отправленные письма")
-    public static SelenideElement outcomeMail() {
-        return  $(byText("Отправленные"));
+    public SelenideElement outcomeMail() {
+        return $x("//a[@href='#sent']");
     }
 
-    @Step("Темы входящих писем")
-    public static ElementsCollection incomeMailTextVisible() {
-        return  $$(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']"));
-    }
-
-    @Step("Темы отправленных писем")
-    public static ElementsCollection outcomeTextMail() {
-        return  $$(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']"));
-    }
+    @Step("Темы писем")
+    public ElementsCollection subjectMailTextVisible() {
+        return $$x("//*[contains(@class,'mail-MessageSnippet-Item_subject')]"); }
 
     @Step("Написать письмо")
-    public static SelenideElement writeMail() {
-        return  $(byText("Написать"));
-    }
+    public SelenideElement writeMail() {return $x("//a[@href='#compose']");}
 
     @Step("Поле Кому")
-    public static SelenideElement whomMail() {
-        return  $(byXpath("//div[@class='composeYabbles']"));
+    public SelenideElement whomMail() {
+        return $x("//div[@class='composeYabbles']");
     }
 
     @Step("Проверить новые письма")
-    public static SelenideElement newMail() {
-        return  $(byXpath("//span[@title='Проверить, есть ли новые письма (F9)']"));
+    public SelenideElement newMail() {
+        return $x("//button[@aria-label='Проверить, есть ли новые письма']");
     }
 
     @Step("Вводим тело письма")
-    public static SelenideElement contantNewMail() {
-        return $(byXpath("//div[@class='cke_wysiwyg_div cke_reset cke_enable_context_menu cke_editable cke_editable_themed " +
-                "cke_contents_ltr cke_htmlplaceholder']"));
-    }
+    public SelenideElement contantNewMail() {
+        return $x("//*[contains(@class,'cke_editable_themed')]"); }
 
     @Step("Вводим тему")
-    public static SelenideElement topicNewMail() {
-        return  $(byName("subject"));
+    public SelenideElement topicNewMail() {
+        return $(byName("subject"));
     }
 
     @Step("Отправить письмо")
-    public static SelenideElement sendMail() {
-        return $(byXpath("//button[@class='Button2 Button2_pin_circle-circle Button2_view_default Button2_size_l']"));
-    }
+    public SelenideElement sendMail() {
+        return $x("//button[contains(@class,'Button2_view_default')]"); }
 
-    @Step("Проверка темы отправленного письма")
-    public static SelenideElement checkTopicOutMail() {
-        return $(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']"));
-    }
+    @Step("Проверка темы письма")
+    public void checkTopicMail(String topic) {
+        SelenideElement element =
+                $x("//*[contains(@class,'mail-MessageSnippet-Item_subject')]");
+        element.shouldHave(text(topic)).click(); }
 
-    @Step("Проверки тела отправленного письма")
-    public static SelenideElement checkContentOutMail() {
-        return $(byXpath("//div[@class='MessageBody_body_pmf3j react-message-wrapper__body']"));
-    }
-
-    @Step("Проверки темы входящего письма")
-    public static SelenideElement checkTopicIncomeMail() {
-        return $(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']"));
-    }
-
-    @Step("Проверки тела входящего письма")
-    public static SelenideElement checkContentIncomeMail() {
-        return $(byXpath("//div[@class='MessageBody_body_pmf3j react-message-wrapper__body']"));
-    }
+    @Step("Проверки тела  письма")
+    public void checkContentMail(String content) {
+        SelenideElement element = $x("//div[contains(@class,'MessageBody_body_pmf3j')]");
+        element.shouldHave(text(content));  }
 
     @Step("Написать письмо")
-    public static String writeLetter(String email, String topic, String context){
-        String topicDate = topic+ " " + TestData.dateTime();
+    public void writeLetter(Letters letter) {
         writeMail().click();
-        whomMail().setValue(email);
-        topicNewMail().setValue(topicDate);
-        contantNewMail().setValue(context);
+        whomMail().setValue(letter.getReciver());
+        topicNewMail().setValue(letter.getSubject());
+        contantNewMail().setValue(letter.getContext());
         sendMail().click();
         newMail().click();
-        outcomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
-        return topicDate;
-    }
+        outcomeMail().shouldBe(visible, Duration.ofSeconds(10)).click(); }
 }

@@ -1,10 +1,21 @@
-package Utils;
+package utils;
 
-public class Letters  {
+// класс для хранения объекта письма
+public class Letters {
+    //тема письма
+    private String subject;
+    //содержание письма
+    private String context;
+    //получатель письма
+    private String reciver;
 
-    String subject;
-    String context;
-    String reciver;
+    public Letters() {}
+
+    public Letters(String subject, String context, String reciver) {
+        this.subject = subject;
+        this.context = context;
+        this.reciver = reciver;
+    }
 
     @Override
     public String toString() {
