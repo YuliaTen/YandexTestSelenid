@@ -37,9 +37,7 @@ public class MailPage {
     }
 
     @Step("Входящие письма")
-    public SelenideElement incomeMail() {
-        return $x("//a[@href='#tabs/relevant']");
-    }
+    public SelenideElement incomeMail() {return $x("//a[@href='#tabs/relevant']");}
 
     @Step("Отправленные письма")
     public SelenideElement outcomeMail() {
@@ -47,13 +45,12 @@ public class MailPage {
     }
 
     @Step("Темы писем")
-    public ElementsCollection subjectMailTextVisible() {
-        return $$x("//*[contains(@class,'mail-MessageSnippet-Item_subject')]"); }
+    public ElementsCollection subjectMailTextVisible() {return $$x("//*[contains(@class,'mail-MessageSnippet-Item_subject')]"); }
 
     @Step("Написать письмо")
     public SelenideElement writeMail() {return $x("//a[@href='#compose']");}
 
-    @Step("Поле Кому")
+    @Step("Вводим Кому")
     public SelenideElement whomMail() {
         return $x("//div[@class='composeYabbles']");
     }
@@ -64,8 +61,7 @@ public class MailPage {
     }
 
     @Step("Вводим тело письма")
-    public SelenideElement contantNewMail() {
-        return $x("//*[contains(@class,'cke_editable_themed')]"); }
+    public SelenideElement contantNewMail() {return $x("//*[contains(@class,'cke_editable_themed')]"); }
 
     @Step("Вводим тему")
     public SelenideElement topicNewMail() {
@@ -73,19 +69,18 @@ public class MailPage {
     }
 
     @Step("Отправить письмо")
-    public SelenideElement sendMail() {
-        return $x("//button[contains(@class,'Button2_view_default')]"); }
+    public SelenideElement sendMail() {return $x("//button[contains(@class,'Button2_view_default')]"); }
 
-    @Step("Проверка темы письма")
+    @Step("Проверка темы письма и открытие его")
     public void checkTopicMail(String topic) {
-        SelenideElement element =
-                $x("//*[contains(@class,'mail-MessageSnippet-Item_subject')]");
-        element.shouldHave(text(topic)).click(); }
+        subjectMailTextVisible().filter(text(topic)).first().shouldHave(text(topic)).click();
+    }
 
     @Step("Проверки тела  письма")
     public void checkContentMail(String content) {
         SelenideElement element = $x("//div[contains(@class,'MessageBody_body_pmf3j')]");
-        element.shouldHave(text(content));  }
+        element.shouldHave(text(content));
+    }
 
     @Step("Написать письмо")
     public void writeLetter(Letters letter) {
@@ -95,5 +90,6 @@ public class MailPage {
         contantNewMail().setValue(letter.getContext());
         sendMail().click();
         newMail().click();
-        outcomeMail().shouldBe(visible, Duration.ofSeconds(10)).click(); }
+        outcomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
+    }
 }

@@ -3,11 +3,11 @@ package utils;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-// класс для кодирования данных в формате Base64
-public final class Base64 {
+// класс для кодирования данных в формате MyBase64
+public final class MyBase64 {
     public static final Charset CODE = StandardCharsets.UTF_8;
 
-    private Base64() {
+    private MyBase64() {
     }
 
     //закодировать

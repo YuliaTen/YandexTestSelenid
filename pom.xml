@@ -82,6 +82,12 @@
             <artifactId>allure-rest-assured</artifactId>
             <version>${allure-junit5.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.14.3</version>
+        </dependency>
     </dependencies>
 
     <build>

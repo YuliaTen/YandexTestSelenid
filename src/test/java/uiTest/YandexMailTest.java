@@ -1,5 +1,6 @@
 package uiTest;
 
+import utils.DBConnect;
 import utils.HighlighterNew;
 import utils.Letters;
 import com.codeborne.selenide.Configuration;
@@ -11,7 +12,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.MailPage;
 import java.time.Duration;
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
+
+import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.WebDriverRunner.addListener;
@@ -19,13 +21,19 @@ import static utils.HighlighterNew.highlight;
 
 
 @DisplayName("UI тесты для проверки работы Яндекс почты")
-public class YandexMailTest  {
+public class YandexMailTest {
     private static MailPage mailPage = new MailPage();
     private static TestData testData = new TestData();
+    private static DBConnect dbConnect = new DBConnect();
+    private Letters letter = dbConnect.getDataLetter();
+
+    public Letters getLetter() {
+        return letter;
+    }
 
     @BeforeAll
     @DisplayName("Стартовые настройки браузера и вход в почту")
-    static void setUp(){
+    static void setUp() {
         Configuration.browser = "chrome";
         addListener(new HighlighterNew());
         open(testData.getStartURL());
@@ -37,46 +45,46 @@ public class YandexMailTest  {
 
     @Test
     @DisplayName("Проверка отображения иконки пользователя и логина")
-    void visibleLoginAndImage(){
-    highlight(element(mailPage.userIMG().shouldBe(visible, Duration.ofSeconds(10))));
-    highlight(element(mailPage.loginTextIMG().shouldHave(text(testData.getLoginMail()))));
-}
+    void visibleLoginAndImage() {
+        highlight(element(mailPage.userIMG().shouldBe(visible, Duration.ofSeconds(10))));
+        highlight(element(mailPage.loginTextIMG().shouldHave(text(testData.getLoginMail()))));
+    }
 
     @Test
     @DisplayName("Проверка видимости писем")
-    void visibleElementLetters(){
+    void visibleElementLetters() {
         mailPage.incomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
         mailPage.subjectMailTextVisible().shouldHave(sizeGreaterThanOrEqual(1));
     }
 
     @Test
     @DisplayName("Отправка письма другому человеку")
-    void sendLetter(){
-        String topicDate = testData.getLetter().getSubject() + " " + testData.dateTime();
-        Letters letter = new Letters(topicDate,testData.getLetter().getContext(),testData.getLetter().getReciver());
+    void sendLetter() {
+        String topicDate = getLetter().getSubject() + " " + testData.dateTime();
+        Letters letter = new Letters(topicDate, getLetter().getContext(), getLetter().getReciver());
         mailPage.writeLetter(letter);
-        mailPage.subjectMailTextVisible().filter(text(topicDate)).shouldBe(sizeGreaterThanOrEqual(1));
+        mailPage.subjectMailTextVisible().filter(text(topicDate)).shouldBe(sizeGreaterThan(0));
         mailPage.checkTopicMail(topicDate);
-        mailPage.checkContentMail(testData.getLetter().getContext());
+        mailPage.checkContentMail(letter.getContext());
     }
 
     @Test
     @DisplayName("Отправка письма себе")
-    void sendLetterMyself(){
-        String topicDate = testData.getTopicMe()+" " + testData.dateTime();
-        Letters letter = new Letters(topicDate,testData.getContentMe(),testData.getMyEmail());
+    void sendLetterMyself() {
+        String topicDate = getLetter().getSubject() + " " + testData.dateTime();
+        Letters letter = new Letters(topicDate, getLetter().getContext(), testData.getLoginMail() + "@yandex.ru");
         mailPage.writeLetter(letter);
-        mailPage.subjectMailTextVisible().filter(text(topicDate)).shouldBe(sizeGreaterThanOrEqual(1));
+        mailPage.subjectMailTextVisible().filter(text(topicDate)).shouldBe(sizeGreaterThan(0));
         mailPage.checkTopicMail(topicDate);
-        mailPage.checkContentMail(testData.getContentMe());
+        mailPage.checkContentMail(letter.getContext());
         mailPage.newMail().click();
         mailPage.incomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
         mailPage.checkTopicMail(topicDate);
-        mailPage.checkContentMail(testData.getContentMe());
+        mailPage.checkContentMail(letter.getContext());
     }
 
     @AfterAll
-    static void close(){
+    static void close() {
         WebDriverRunner.closeWebDriver();
     }
 }
