@@ -27,10 +27,6 @@ public class YandexMailTest {
     private static DBConnect dbConnect = new DBConnect();
     private Letters letter = dbConnect.getDataLetter();
 
-    public Letters getLetter() {
-        return letter;
-    }
-
     @BeforeAll
     @DisplayName("Стартовые настройки браузера и вход в почту")
     static void setUp() {
@@ -60,27 +56,27 @@ public class YandexMailTest {
     @Test
     @DisplayName("Отправка письма другому человеку")
     void sendLetter() {
-        String topicDate = getLetter().getSubject() + " " + testData.dateTime();
-        Letters letter = new Letters(topicDate, getLetter().getContext(), getLetter().getReciver());
-        mailPage.writeLetter(letter);
+        String topicDate = letter.getSubject() + " " + testData.dateTime();
+        Letters letterNew = new Letters(topicDate, letter.getContext(), letter.getReciver());
+        mailPage.writeLetter(letterNew);
         mailPage.subjectMailTextVisible().filter(text(topicDate)).shouldBe(sizeGreaterThan(0));
         mailPage.checkTopicMail(topicDate);
-        mailPage.checkContentMail(letter.getContext());
+        mailPage.checkContentMail(letterNew.getContext());
     }
 
     @Test
     @DisplayName("Отправка письма себе")
     void sendLetterMyself() {
-        String topicDate = getLetter().getSubject() + " " + testData.dateTime();
-        Letters letter = new Letters(topicDate, getLetter().getContext(), testData.getLoginMail() + "@yandex.ru");
-        mailPage.writeLetter(letter);
+        String topicDate = letter.getSubject() + " " + testData.dateTime();
+        Letters letterNew = new Letters(topicDate, letter.getContext(), testData.getLoginMail() + "@yandex.ru");
+        mailPage.writeLetter(letterNew);
         mailPage.subjectMailTextVisible().filter(text(topicDate)).shouldBe(sizeGreaterThan(0));
         mailPage.checkTopicMail(topicDate);
-        mailPage.checkContentMail(letter.getContext());
+        mailPage.checkContentMail(letterNew.getContext());
         mailPage.newMail().click();
         mailPage.incomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
         mailPage.checkTopicMail(topicDate);
-        mailPage.checkContentMail(letter.getContext());
+        mailPage.checkContentMail(letterNew.getContext());
     }
 
     @AfterAll

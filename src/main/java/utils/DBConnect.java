@@ -24,10 +24,8 @@ public class DBConnect {
         String query = "SELECT subject_text, context_text, email FROM lettersyandex.letter_contact " +
                 " INNER JOIN  lettersyandex.contact ON recever_id = idContact INNER JOIN  lettersyandex.letter " +
                 "ON idletter = letter_id  INNER JOIN lettersyandex.subjectl ON idsubject = subject_id";
-        PreparedStatement stat = null;
         try {
-            stat = getDbConnection().prepareStatement(query);
-            resSet = stat.executeQuery();
+            resSet = getDbConnection().prepareStatement(query).executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,27 +34,19 @@ public class DBConnect {
 
     // получить объект класса Letter из результата запроса к бд
     public Letters getDataLetter() {
-        ResultSet resultSet = getLetter();
         ArrayList<Letters> arrayLetter = new ArrayList<>();
-        try {
-            while (resultSet.next()) {
+        try(ResultSet resultSet = getLetter()) {
+            while (resultSet!=null && resultSet.next()) {
                 Letters letter = new Letters();
                 letter.setSubject(resultSet.getString("subject_text"));
                 letter.setContext(resultSet.getString("context_text"));
                 letter.setReciver(resultSet.getString("email"));
                 arrayLetter.add(letter);
             }
-        } catch (SQLException | NullPointerException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
+
         if (arrayLetter.isEmpty()) {
             Letters letter = new Letters("start", "start", "start@yandex.ru");
             arrayLetter.add(letter);

@@ -57,7 +57,7 @@ public class MailPage {
 
     @Step("Проверить новые письма")
     public SelenideElement newMail() {
-        return $x("//button[@aria-label='Проверить, есть ли новые письма']");
+        return $x("//*[contains(@class,'mail-ComposeButton-Refresh')]");
     }
 
     @Step("Вводим тело письма")
