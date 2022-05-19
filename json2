@@ -1,0 +1,13 @@
+{
+  "models": [
+    {
+      "name": "messages",
+      "params": {
+        "current_folder": "1",
+        "sort_type": "date",
+        "with_pins": "yes"
+      }
+    }
+  ],
+  "_ckey": "EiDdiZQlLy9gfwpJOCbJHlu4h08=!l3bdzkeo"
+}

@@ -11,9 +11,7 @@ public class TestData {
     private String startURL = "https://mail.yandex.ru/";
 
     @Step("Получение логина")
-    public String getLoginMail() {
-        return loginMail;
-    }
+    public String getLoginMail() {return loginMail;}
 
     public String getPasswordMail() {
         return passwordMail;

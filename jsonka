@@ -1,0 +1,655 @@
+{
+  "models": [
+    {
+      "name": "messages",
+      "status": "ok",
+      "data": {
+        "details": {
+          "has-more": false
+        },
+        "message": [
+          {
+            "count": 1,
+            "fid": "1",
+            "firstline": "К Вашему аккаунту yuliatestirova на Яндексе привязан номер телефона, позволяющий при необходимости восстановить доступ с помощью смс. Если номер привязали Вы, то всё в порядке. Если нет — это мог сделать",
+            "mid": "179299560164688202",
+            "message_id": "\u003c20220516133412.77D754780061@passport-v8.passport.yandex.net\u003e",
+            "size": 8453,
+            "stid": "320.mail:1591092426.E4967473:4605593326677113955549124557",
+            "tid": "t179299560164688202",
+            "tabId": "relevant",
+            "type": [
+              56,
+              102
+            ],
+            "types": "56,102",
+            "subject": "К аккаунту на Яндексе привязан телефонный номер",
+            "subject_prefix": "",
+            "new": 0,
+            "date": {
+              "iso": "2022-05-16T16:34:12",
+              "chunks": {
+                "year": 2022,
+                "month": 4,
+                "date": 16,
+                "hours": 16,
+                "minutes": 34
+              },
+              "timestamp": 1652708052000
+            },
+            "field": [
+              {
+                "type": "from",
+                "is_free": false,
+                "is_service": true,
+                "ref": "bedb8e001fe516af4b1a0c6c584b25c5",
+                "email": "noreply@id.yandex.ru",
+                "name": "Яндекс ID",
+                "monogram": "D0AFI"
+              },
+              {
+                "type": "to",
+                "is_free": true,
+                "is_service": false,
+                "ref": "f517932fd5eb0a7777bacc6acee48ce0",
+                "email": "yuliatestirova@yandex.ru",
+                "name": "yuliatestirova@yandex.ru",
+                "monogram": "Y"
+              },
+              {
+                "type": "reply-to",
+                "is_free": false,
+                "is_service": true,
+                "ref": "bedb8e001fe516af4b1a0c6c584b25c5",
+                "email": "noreply@id.yandex.ru",
+                "name": "noreply@id.yandex.ru",
+                "monogram": "N"
+              }
+            ],
+            "idx": 1,
+            "flags": {},
+            "lid": [
+              "10",
+              "13",
+              "9",
+              "FAKE_RECENT_LBL",
+              "FAKE_SEEN_LBL"
+            ],
+            "lid_cnt": {},
+            "recipients": {
+              "from": {
+                "displayName": "Яндекс ID",
+                "type": "icon",
+                "color": "#3d88f2",
+                "mono": "Я",
+                "local": "noreply",
+                "url": "ya-default-newlogo",
+                "urlSmall": "ya-default-newlogo",
+                "domain": "id.yandex.ru",
+                "valid": true,
+                "email": "Яндекс ID \u003cnoreply@id.yandex.ru\u003e",
+                "isSelf": false,
+                "cacheId": "\"Яндекс ID\" \u003cnoreply@id.yandex.ru\u003e"
+              },
+              "to": {
+                "displayName": "\"yuliatestirova@yandex.ru\"",
+                "type": "none",
+                "color": "#3d88f2",
+                "mono": "YU",
+                "local": "yuliatestirova",
+                "url": "",
+                "urlSmall": "",
+                "domain": "yandex.ru",
+                "valid": true,
+                "email": "\"yuliatestirova@yandex.ru\" \u003cyuliatestirova@yandex.ru\u003e",
+                "isSelf": true,
+                "cacheId": "\"yuliatestirova@yandex.ru\" \u003cyuliatestirova@yandex.ru\u003e"
+              }
+            }
+          },
+          {
+            "count": 1,
+            "fid": "1",
+            "firstline": "Это письмо отправлено почтовым сервером yandex.ru. К сожалению, мы вынуждены сообщить Вам о том, что Ваше письмо не может быть отправлено одному или нескольким адресатам. Технические подробности можно найти ниже.",
+            "mid": "179299560164688197",
+            "message_id": "\u003c20220515181943.50342341AF9B@postback20p.mail.yandex.net\u003e",
+            "size": 5432,
+            "stid": "320.mail:1591092426.E6050036:3590426849112117032427990706171",
+            "tid": "t179299560164688197",
+            "tabId": "relevant",
+            "type": [
+              8
+            ],
+            "types": "8",
+            "subject": "Недоставленное сообщение",
+            "subject_prefix": "",
+            "new": 0,
+            "date": {
+              "iso": "2022-05-15T21:19:43",
+              "chunks": {
+                "year": 2022,
+                "month": 4,
+                "date": 15,
+                "hours": 21,
+                "minutes": 19
+              },
+              "timestamp": 1652638783000
+            },
+            "field": [
+              {
+                "type": "from",
+                "is_free": true,
+                "is_service": true,
+                "ref": "4007062ea2c9b8bd4d126093a1d87a88",
+                "email": "mailer-daemon@yandex.ru",
+                "name": "mailer-daemon@yandex.ru",
+                "monogram": "M"
+              },
+              {
+                "type": "to",
+                "is_free": true,
+                "is_service": false,
+                "ref": "f517932fd5eb0a7777bacc6acee48ce0",
+                "email": "yuliatestirova@yandex.ru",
+                "name": "yuliatestirova@yandex.ru",
+                "monogram": "Y"
+              },
+              {
+                "type": "reply-to",
+                "is_free": true,
+                "is_service": true,
+                "ref": "4007062ea2c9b8bd4d126093a1d87a88",
+                "email": "mailer-daemon@yandex.ru",
+                "name": "mailer-daemon@yandex.ru",
+                "monogram": "M"
+              }
+            ],
+            "idx": 2,
+            "flags": {
+              "attachment": true,
+              "bounce": true
+            },
+            "lid": [
+              "21",
+              "FAKE_ATTACHED_LBL",
+              "FAKE_RECENT_LBL",
+              "FAKE_SEEN_LBL"
+            ],
+            "lid_cnt": {},
+            "widget": {
+              "info": {
+                "mid": "179299560164688197",
+                "type": "bounce",
+                "subtype": "other",
+                "valid": true,
+                "double": false,
+                "id": "",
+                "version": "",
+                "showType": "list"
+              },
+              "controls": [
+                {
+                  "role": "logo",
+                  "type": "logo",
+                  "attributes": {
+                    "color": "transparent",
+                    "has_html_entities": false,
+                    "icon": "Widgets_bounce-not-ok-dark",
+                    "label": "Почтовый сервис yandex.ru",
+                    "text_color": "#000000",
+                    "zubchiki": false
+                  }
+                },
+                {
+                  "role": "title",
+                  "type": "text",
+                  "attributes": {
+                    "has_html_entities": false,
+                    "label": "Письмо отправлено на несуществующий адрес teenager11@yandex.ru"
+                  }
+                },
+                {
+                  "role": "description-1",
+                  "type": "text",
+                  "attributes": {
+                    "has_html_entities": false,
+                    "label": ""
+                  }
+                },
+                {
+                  "role": "action-2",
+                  "type": "compose",
+                  "attributes": {
+                    "fix_rcpt": true,
+                    "has_html_entities": false,
+                    "label": "Исправить",
+                    "mid": "179299560164688196"
+                  }
+                },
+                {
+                  "role": "action-1",
+                  "type": "delete",
+                  "attributes": {
+                    "has_html_entities": false,
+                    "label": "Удалить"
+                  }
+                }
+              ]
+            },
+            "widgets": [
+              {
+                "info": {
+                  "mid": "179299560164688197",
+                  "type": "bounce",
+                  "subtype": "other",
+                  "valid": true,
+                  "double": false,
+                  "id": "",
+                  "version": "",
+                  "showType": "list"
+                },
+                "controls": [
+                  {
+                    "role": "logo",
+                    "type": "logo",
+                    "attributes": {
+                      "color": "transparent",
+                      "has_html_entities": false,
+                      "icon": "Widgets_bounce-not-ok-dark",
+                      "label": "Почтовый сервис yandex.ru",
+                      "text_color": "#000000",
+                      "zubchiki": false
+                    }
+                  },
+                  {
+                    "role": "title",
+                    "type": "text",
+                    "attributes": {
+                      "has_html_entities": false,
+                      "label": "Письмо отправлено на несуществующий адрес teenager11@yandex.ru"
+                    }
+                  },
+                  {
+                    "role": "description-1",
+                    "type": "text",
+                    "attributes": {
+                      "has_html_entities": false,
+                      "label": ""
+                    }
+                  },
+                  {
+                    "role": "action-2",
+                    "type": "compose",
+                    "attributes": {
+                      "fix_rcpt": true,
+                      "has_html_entities": false,
+                      "label": "Исправить",
+                      "mid": "179299560164688196"
+                    }
+                  },
+                  {
+                    "role": "action-1",
+                    "type": "delete",
+                    "attributes": {
+                      "has_html_entities": false,
+                      "label": "Удалить"
+                    }
+                  }
+                ]
+              }
+            ],
+            "recipients": {
+              "from": {
+                "displayName": "\"mailer-daemon@yandex.ru\"",
+                "type": "icon",
+                "color": "#e64545",
+                "mono": "M",
+                "local": "mailer-daemon",
+                "url": "ya-default-newlogo",
+                "urlSmall": "ya-default-newlogo",
+                "domain": "yandex.ru",
+                "valid": true,
+                "email": "\"mailer-daemon@yandex.ru\" \u003cmailer-daemon@yandex.ru\u003e",
+                "isSelf": false,
+                "cacheId": "\"mailer-daemon@yandex.ru\" \u003cmailer-daemon@yandex.ru\u003e"
+              },
+              "to": {
+                "displayName": "\"yuliatestirova@yandex.ru\"",
+                "type": "none",
+                "color": "#3d88f2",
+                "mono": "YU",
+                "local": "yuliatestirova",
+                "url": "",
+                "urlSmall": "",
+                "domain": "yandex.ru",
+                "valid": true,
+                "email": "\"yuliatestirova@yandex.ru\" \u003cyuliatestirova@yandex.ru\u003e",
+                "isSelf": true,
+                "cacheId": "\"yuliatestirova@yandex.ru\" \u003cyuliatestirova@yandex.ru\u003e"
+              }
+            }
+          },
+          {
+            "count": 1,
+            "fid": "1",
+            "firstline": "тестовое тело письма 2",
+            "mid": "179299560164688195",
+            "message_id": "\u003c988611652638771@mail.yandex.ru\u003e",
+            "size": 1904,
+            "stid": "320.mail:1591092426.E6708223:2252193840211973316125465967977",
+            "tid": "t179299560164688194",
+            "tabId": "relevant",
+            "type": [
+              4,
+              55
+            ],
+            "types": "4,55",
+            "subject": "тема 3 15-05-2022 21:19:29",
+            "subject_prefix": "",
+            "new": 0,
+            "date": {
+              "iso": "2022-05-15T21:19:34",
+              "chunks": {
+                "year": 2022,
+                "month": 4,
+                "date": 15,
+                "hours": 21,
+                "minutes": 19
+              },
+              "timestamp": 1652638774000
+            },
+            "field": [
+              {
+                "type": "from",
+                "is_free": true,
+                "is_service": false,
+                "ref": "f517932fd5eb0a7777bacc6acee48ce0",
+                "email": "yuliatestirova@yandex.ru",
+                "name": "Yulia Testirova",
+                "monogram": "YT"
+              },
+              {
+                "type": "to",
+                "is_free": true,
+                "is_service": false,
+                "ref": "f517932fd5eb0a7777bacc6acee48ce0",
+                "email": "yuliatestirova@yandex.ru",
+                "name": "yuliatestirova@yandex.ru",
+                "monogram": "Y"
+              },
+              {
+                "type": "reply-to",
+                "is_free": true,
+                "is_service": false,
+                "ref": "f517932fd5eb0a7777bacc6acee48ce0",
+                "email": "yuliatestirova@yandex.ru",
+                "name": "yuliatestirova@yandex.ru",
+                "monogram": "Y"
+              }
+            ],
+            "idx": 3,
+            "flags": {
+              "human": true
+            },
+            "lid": [
+              "17",
+              "20",
+              "9",
+              "FAKE_MULCA_SHARED_LBL",
+              "FAKE_RECENT_LBL",
+              "FAKE_SEEN_LBL"
+            ],
+            "lid_cnt": {},
+            "recipients": {
+              "from": {
+                "displayName": "Yulia Testirova",
+                "type": "none",
+                "color": "#3d88f2",
+                "mono": "YT",
+                "local": "yuliatestirova",
+                "url": "",
+                "urlSmall": "",
+                "domain": "yandex.ru",
+                "valid": true,
+                "email": "Yulia Testirova \u003cyuliatestirova@yandex.ru\u003e",
+                "isSelf": true,
+                "cacheId": "\"Yulia Testirova\" \u003cyuliatestirova@yandex.ru\u003e"
+              },
+              "to": {
+                "displayName": "\"yuliatestirova@yandex.ru\"",
+                "type": "none",
+                "color": "#3d88f2",
+                "mono": "YU",
+                "local": "yuliatestirova",
+                "url": "",
+                "urlSmall": "",
+                "domain": "yandex.ru",
+                "valid": true,
+                "email": "\"yuliatestirova@yandex.ru\" \u003cyuliatestirova@yandex.ru\u003e",
+                "isSelf": true,
+                "cacheId": "\"yuliatestirova@yandex.ru\" \u003cyuliatestirova@yandex.ru\u003e"
+              }
+            }
+          },
+          {
+            "count": 1,
+            "fid": "1",
+            "firstline": "Вы зарегистрировались в Яндекс.Диске Безлимит для фото Установите мобильное приложение Диска, и вы сможете бесплатно хранить все свои фото, снятые на телефон. Освободите место на компьютере Скачайте",
+            "mid": "178736610211266562",
+            "message_id": "\u003c20220325174118.361819.1f4b3e82db284916af515e4e17a218ab@api-1.production.ysendercloud\u003e",
+            "size": 42659,
+            "stid": "320.mail:1591092426.E4913756:1795244219167231733655068498272",
+            "tid": "t178736610211266562",
+            "tabId": "relevant",
+            "type": [
+              13,
+              46,
+              56,
+              66,
+              102
+            ],
+            "types": "13,46,56,66,102",
+            "subject": "Добро пожаловать в Яндекс.Диск! Мы поможем вам узнать больше о функциях сервиса",
+            "subject_prefix": "",
+            "new": 0,
+            "date": {
+              "iso": "2022-03-25T20:41:18",
+              "chunks": {
+                "year": 2022,
+                "month": 2,
+                "date": 25,
+                "hours": 20,
+                "minutes": 41
+              },
+              "timestamp": 1648230078000
+            },
+            "field": [
+              {
+                "type": "from",
+                "is_free": false,
+                "is_service": false,
+                "ref": "21dbe90d6af627fcc9dd48d0be6e6c9c",
+                "email": "promo@disk.yandex.ru",
+                "name": "Команда Яндекс.Диска",
+                "monogram": "D09AD0AF"
+              },
+              {
+                "type": "to",
+                "is_free": true,
+                "is_service": false,
+                "ref": "f517932fd5eb0a7777bacc6acee48ce0",
+                "email": "yuliatestirova@yandex.ru",
+                "name": "yuliatestirova@yandex.ru",
+                "monogram": "Y"
+              },
+              {
+                "type": "reply-to",
+                "is_free": true,
+                "is_service": false,
+                "ref": "6ba7eb75b67b12f5b7a805358b41403e",
+                "email": "disk.promo@yandex.ru",
+                "name": "disk.promo@yandex.ru",
+                "monogram": "D"
+              }
+            ],
+            "idx": 4,
+            "flags": {},
+            "lid": [
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "9",
+              "FAKE_RECENT_LBL",
+              "FAKE_SEEN_LBL"
+            ],
+            "lid_cnt": {},
+            "recipients": {
+              "from": {
+                "displayName": "Команда Яндекс.Диска",
+                "type": "icon",
+                "color": "#f39718",
+                "mono": "К",
+                "local": "promo",
+                "url": "ya-disk",
+                "urlSmall": "ya-disk",
+                "domain": "disk.yandex.ru",
+                "valid": true,
+                "email": "Команда Яндекс.Диска \u003cpromo@disk.yandex.ru\u003e",
+                "isSelf": false,
+                "cacheId": "\"Команда Яндекс.Диска\" \u003cpromo@disk.yandex.ru\u003e"
+              },
+              "to": {
+                "displayName": "\"yuliatestirova@yandex.ru\"",
+                "type": "none",
+                "color": "#3d88f2",
+                "mono": "YU",
+                "local": "yuliatestirova",
+                "url": "",
+                "urlSmall": "",
+                "domain": "yandex.ru",
+                "valid": true,
+                "email": "\"yuliatestirova@yandex.ru\" \u003cyuliatestirova@yandex.ru\u003e",
+                "isSelf": true,
+                "cacheId": "\"yuliatestirova@yandex.ru\" \u003cyuliatestirova@yandex.ru\u003e"
+              }
+            }
+          },
+          {
+            "count": 1,
+            "fid": "1",
+            "firstline": "Мы подготовили несколько писем с полезными советами, которые помогут вам освоиться в новом ящике. Для начала расскажем про отправку писем. Послать письмо — дело нехитрое. Но иногда возникает сомнение, дошло",
+            "mid": "178736610211266561",
+            "message_id": "\u003cwelcome-letter\u003e",
+            "size": 30542,
+            "stid": "320.mail:1591092426.E6161725:1802344163192464081449337838284",
+            "tid": "t178736610211266561",
+            "tabId": "relevant",
+            "type": [
+              13,
+              46,
+              56,
+              102
+            ],
+            "types": "13,46,56,102",
+            "subject": "Как убедиться, что письмо доставлено",
+            "subject_prefix": "",
+            "new": 0,
+            "date": {
+              "iso": "2022-03-25T20:41:11",
+              "chunks": {
+                "year": 2022,
+                "month": 2,
+                "date": 25,
+                "hours": 20,
+                "minutes": 41
+              },
+              "timestamp": 1648230071000
+            },
+            "field": [
+              {
+                "type": "from",
+                "is_free": false,
+                "is_service": true,
+                "ref": "bd332e4f74314f85df94d573a340843a",
+                "email": "hello@yandex-team.ru",
+                "name": "Команда Яндекс.Почты",
+                "monogram": "D09AD0AF"
+              },
+              {
+                "type": "to",
+                "is_free": true,
+                "is_service": false,
+                "ref": "f517932fd5eb0a7777bacc6acee48ce0",
+                "email": "yuliatestirova@yandex.ru",
+                "name": "yuliatestirova@yandex.ru",
+                "monogram": "Y"
+              },
+              {
+                "type": "reply-to",
+                "is_free": false,
+                "is_service": true,
+                "ref": "bd332e4f74314f85df94d573a340843a",
+                "email": "hello@yandex-team.ru",
+                "name": "hello@yandex-team.ru",
+                "monogram": "H"
+              }
+            ],
+            "idx": 5,
+            "flags": {},
+            "lid": [
+              "10",
+              "11",
+              "12",
+              "13",
+              "9",
+              "FAKE_RECENT_LBL",
+              "FAKE_SEEN_LBL"
+            ],
+            "lid_cnt": {},
+            "recipients": {
+              "from": {
+                "displayName": "Команда Яндекс.Почты",
+                "type": "icon",
+                "color": "#b8c1d9",
+                "mono": "К",
+                "local": "hello",
+                "url": "ya-default-newlogo",
+                "urlSmall": "ya-default-newlogo",
+                "domain": "yandex-team.ru",
+                "valid": true,
+                "email": "Команда Яндекс.Почты \u003chello@yandex-team.ru\u003e",
+                "isSelf": false,
+                "cacheId": "\"Команда Яндекс.Почты\" \u003chello@yandex-team.ru\u003e"
+              },
+              "to": {
+                "displayName": "\"yuliatestirova@yandex.ru\"",
+                "type": "none",
+                "color": "#3d88f2",
+                "mono": "YU",
+                "local": "yuliatestirova",
+                "url": "",
+                "urlSmall": "",
+                "domain": "yandex.ru",
+                "valid": true,
+                "email": "\"yuliatestirova@yandex.ru\" \u003cyuliatestirova@yandex.ru\u003e",
+                "isSelf": true,
+                "cacheId": "\"yuliatestirova@yandex.ru\" \u003cyuliatestirova@yandex.ru\u003e"
+              }
+            }
+          }
+        ]
+      },
+      "xRequestId": "73b88d8c7121b53e371660e56e01edb6"
+    }
+  ],
+  "uid": "1591092426",
+  "timestamp": 1652715907756,
+  "cookieRenew": false,
+  "versions": {
+    "u2709": "Update client",
+    "duffman": "5.6.1",
+    "web-api": "11.1.0"
+  }
+}

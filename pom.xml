@@ -21,6 +21,8 @@
         <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
         <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
         <json-simple.version>1.1.1</json-simple.version>
+        <jsoup.version>1.14.3</jsoup.version>
+        <jackson-databind.version>2.13.2.2</jackson-databind.version>
     </properties>
 
     <dependencies>
@@ -86,7 +88,13 @@
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.14.3</version>
+            <version>${jsoup.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
         </dependency>
     </dependencies>
 
@@ -132,6 +140,5 @@
                 </configuration>
             </plugin>
         </plugins>
-        <testOutputDirectory>target/allure-results</testOutputDirectory>
     </build>
 </project>
