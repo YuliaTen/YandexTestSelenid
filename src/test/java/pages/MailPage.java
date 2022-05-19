@@ -1,84 +1,95 @@
 package pages;
 
+import utils.Letters;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-
+import java.time.Duration;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selectors.*;
 
+// PageObject для страницы почты
 public class MailPage {
 
-    public static SelenideElement income() {
-        return  $(By.linkText("Войти"));
+    public SelenideElement income() {
+        return $(By.linkText("Войти"));
     }
 
-    public static SelenideElement loginMail() {
-        return  $(By.name("login"));
+    public SelenideElement loginMail() {
+        return $(By.name("login"));
     }
 
-    public static SelenideElement passMail() {
-        return  $(By.name("passwd"));
+    public SelenideElement passMail() {
+        return $(By.name("passwd"));
     }
 
-    public static SelenideElement userIMG() {
-        return  $(By.className("user-pic__image"));
+    @Step("Проверка иконки пользователя")
+    public SelenideElement userIMG() {
+        return $(By.className("user-pic__image"));
     }
 
-    public static SelenideElement loginTextIMG() {
-        return  $(By.className("user-account__name"));
+    @Step("Проверка логина внутри почты")
+    public SelenideElement loginTextIMG() {
+        return $(By.className("user-account__name"));
     }
 
-    public static SelenideElement incomeMail() {
-        return  $(byText("Входящие"));
+    @Step("Входящие письма")
+    public SelenideElement incomeMail() {return $x("//a[@href='#tabs/relevant']");}
+
+    @Step("Отправленные письма")
+    public SelenideElement outcomeMail() {
+        return $x("//a[@href='#sent']");
     }
 
-    public static SelenideElement outcomeMail() {
-        return  $(byText("Отправленные"));
+    @Step("Темы писем")
+    public ElementsCollection subjectMailTextVisible() {return $$x("//*[contains(@class,'mail-MessageSnippet-Item_subject')]"); }
+
+    @Step("Написать письмо")
+    public SelenideElement writeMail() {return $x("//a[@href='#compose']");}
+
+    @Step("Вводим Кому")
+    public SelenideElement whomMail() {
+        return $x("//div[@class='composeYabbles']");
     }
 
-    public static ElementsCollection incomeMailTextVisible() {
-        return  $$(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']"));
+    @Step("Проверить новые письма")
+    public SelenideElement newMail() {
+        return $x("//*[contains(@class,'mail-ComposeButton-Refresh')]");
     }
 
-    public static ElementsCollection outcomeTextMail() {
-        return  $$(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']"));
+    @Step("Вводим тело письма")
+    public SelenideElement contantNewMail() {return $x("//*[contains(@class,'cke_editable_themed')]"); }
+
+    @Step("Вводим тему")
+    public SelenideElement topicNewMail() {
+        return $(byName("subject"));
     }
 
-    public static SelenideElement writeMail() {
-        return  $(byText("Написать"));
+    @Step("Отправить письмо")
+    public SelenideElement sendMail() {return $x("//button[contains(@class,'Button2_view_default')]"); }
+
+    @Step("Проверка темы письма и открытие его")
+    public void checkTopicMail(String topic) {
+        subjectMailTextVisible().filter(text(topic)).first().shouldHave(text(topic)).click();
     }
 
-    public static SelenideElement whomMail() {
-        return  $(byXpath("//div[@class='composeYabbles']"));
+    @Step("Проверки тела  письма")
+    public void checkContentMail(String content) {
+        SelenideElement element = $x("//div[contains(@class,'MessageBody_body_pmf3j')]");
+        element.shouldHave(text(content));
     }
 
-    public static SelenideElement contantNewMail() {
-        return $(byXpath("//div[@class='cke_wysiwyg_div cke_reset cke_enable_context_menu cke_editable cke_editable_themed " +
-                "cke_contents_ltr cke_htmlplaceholder']"));
-    }
-
-    public static SelenideElement topicNewMail() {
-        return  $(byName("subject"));
-    }
-
-    public static SelenideElement sendMail() {
-        return $(byXpath("//button[@class='Button2 Button2_pin_circle-circle Button2_view_default Button2_size_l']"));
-    }
-
-    public static SelenideElement checkTopicOutMail() {
-        return $(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']"));
-    }
-
-    public static SelenideElement checkContentOutMail() {
-        return $(byXpath("//div[@class='MessageBody_body_pmf3j react-message-wrapper__body']"));
-    }
-
-    public static SelenideElement checkTopicIncomeMail() {
-        return $(byXpath("//span[@class='mail-MessageSnippet-Item mail-MessageSnippet-Item_subject']"));
-    }
-
-    public static SelenideElement checkContentIncomeMail() {
-        return $(byXpath("//div[@class='MessageBody_body_pmf3j react-message-wrapper__body']"));
+    @Step("Написать письмо")
+    public void writeLetter(Letters letter) {
+        writeMail().click();
+        whomMail().setValue(letter.getReciver());
+        topicNewMail().setValue(letter.getSubject());
+        contantNewMail().setValue(letter.getContext());
+        sendMail().click();
+        newMail().click();
+        outcomeMail().shouldBe(visible, Duration.ofSeconds(10)).click();
     }
 }

@@ -1,31 +1,31 @@
-package dataSource;
+package utils;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+import org.openqa.selenium.support.events.WebDriverListener;
 
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.sleep;
 
-public class Highlighter extends AbstractWebDriverEventListener {
+// Новый класс для реализации визуального отображения действий пользователя
+public class HighlighterNew implements WebDriverListener {
     @Override
-    public void beforeClickOn(WebElement element, WebDriver driver) {
+    public void beforeClick(WebElement element) {
         highlight(element, "orange");
     }
 
     @Override
-    public void beforeFindBy(By by, WebElement element, WebDriver driver) {
+    public void beforeFindElement(WebElement element, By locator) {
         highlight(element, "red");
     }
 
     @Override
-    public void afterFindBy(By by, WebElement element, WebDriver driver) {
-        highlight(element, "green");
+    public void afterFindElement(WebElement element, By locator, WebElement result) {
+        highlight(result, "green");
     }
 
     @Override
-    public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
+    public void beforeSendKeys(WebElement element, CharSequence... keysToSend) {
         highlight(element, "orange");
     }
 
