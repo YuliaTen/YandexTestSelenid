@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Data {
-    public ArrayList<MessageModels> message;
+    public ArrayList<Message> message;
 
     @Override
     public String toString() {
@@ -15,11 +15,11 @@ public class Data {
                 '}';
     }
 
-    public ArrayList<MessageModels> getMessage() {
+    public ArrayList<Message> getMessage() {
         return message;
     }
 
-    public void setMessage(ArrayList<MessageModels> message) {
+    public void setMessage(ArrayList<Message> message) {
         this.message = message;
     }
 }

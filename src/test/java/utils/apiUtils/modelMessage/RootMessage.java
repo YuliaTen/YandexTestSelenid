@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 // класс корневой для распарсивания приходящего json для списка писем
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Root {
+public class RootMessage {
     public ArrayList<Model> models;
 
     @Override
     public String toString() {
-        return "Root{" +
+        return "RootMessage{" +
                 "models=" + models +
                 '}';
     }

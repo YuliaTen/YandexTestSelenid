@@ -3,35 +3,71 @@ package utils.apiUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Step;
+import io.restassured.http.ContentType;
 import io.restassured.http.Cookies;
 import io.restassured.response.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import utils.DBConnect;
 import utils.Letters;
 import utils.TestData;
-import utils.apiUtils.modelMessage.MessageModels;
-import utils.apiUtils.modelMessage.Root;
+import utils.apiUtils.modelMessage.Message;
+import utils.apiUtils.modelMessage.RootMessage;
+
 import java.io.FileReader;
-import java.util.ArrayList;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // класс хранит методы для упрощения работы с АПИ
 public class MethodsForApi {
     private static JsonRequestMessageClass jsonRequestMessageClass = new JsonRequestMessageClass();
     private static TestData testData = new TestData();
+    private final String BASE_PATH = "web-api";
+    private final String BASE_URI = "https://mail.yandex.ru/";
+    private static Cookies cookiesAuto;
+    private static String ckey;
+    private static Response responseMail;
+    private static AutorizationYandexApi auto = new AutorizationYandexApi();
+    private DBConnect dbConnect = new DBConnect();
+    private Letters letter = dbConnect.getDataLetter();
+
+    @Step("Залогиниться в почте")
+    public Response loginMail(){
+        cookiesAuto = auto.getAutorizationCookies();
+        responseMail = getMailAnswer(cookiesAuto);
+        ckey = getDataFromResponseHTML(responseMail, "name", "_ckey");
+        return responseMail;
+    }
+
+    @Step("Отправить письмо")
+    public List<Message> sendLetter(String reciver,String folderNum, String topicDate){
+        if (reciver.equalsIgnoreCase("me")) {
+            reciver = testData.getLoginMail() + "@yandex.ru";
+        }
+        else reciver =  letter.getReciver();
+        Letters letterNew = new Letters(topicDate, letter.getContext(), reciver);
+        getSendMessageAnswer(letterNew);
+        return getMessageList(folderNum);
+    }
+
+    @Step("Получить тему письма")
+    public String getTopicDate(){
+        return letter.getSubject() + " " + testData.dateTime();
+    }
 
 
     @Step("получаем ответ после обращения к главной странице почты")
     public Response getMailAnswer(Cookies cookies) {
-        Response responseMail =
+        return
                 given()
                         .cookies(cookies)
                         .when()
-                        .get("https://mail.yandex.ru/");
-        return responseMail;
+                        .get(BASE_URI);
     }
 
     @Step("получаем ключ из тела ответа, для формирования запроса по получению писем")
@@ -46,11 +82,11 @@ public class MethodsForApi {
     }
 
     @Step("Создаем json в виде строки, на основе ключа для дальнейшей передачи в запрос, номер папки( 1-входящие, 4-отправленные)")
-    public String getJsonStringForRequest(String key, String numberFolder) {
-        ObjectMapper mapper1 = new ObjectMapper();
+    public String getJsonStringForRequest(String numberFolder) {
+        ObjectMapper mapper = new ObjectMapper();
         String json = "test";
         try {
-            json = mapper1.writeValueAsString(jsonRequestMessageClass.getJsonClass(key, numberFolder));
+            json = mapper.writeValueAsString(jsonRequestMessageClass.getJsonClass(ckey, numberFolder));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -58,26 +94,31 @@ public class MethodsForApi {
     }
 
     @Step("получаем лист с сообщениями")
-    public ArrayList<MessageModels> getMessageList(Cookies cookies, String json) {
+    public List<Message> getMessageList(String numberFolder) {
+        String json = getJsonStringForRequest(numberFolder);
         Response responseMessage =
                 given()
+                        .baseUri(BASE_URI)
+                        .basePath(BASE_PATH)
                         .contentType("text/plain; charset=utf-8")
-                        .cookies(cookies)
+                        .cookies(cookiesAuto)
                         .body(json).contentType("application/json")
                         .when()
-                        .post("https://mail.yandex.ru/web-api/models/liza1?_m=messages");
-        Root root2 = responseMessage.body().as(Root.class);
-        ArrayList<MessageModels> message = root2.getModels().get(0).getData().getMessage();
-        return message;
+                        .post("/models/liza1?_m=messages");
+        RootMessage rootMessage = responseMessage.body().as(RootMessage.class);
+        return rootMessage.getModels().get(0).getData().getMessage();
     }
 
+
     @Step("получаем сообщения")
-    public Response getSendMessegeAnswer(Cookies cookies, String ckey, Letters letter) {
+    public Response getSendMessageAnswer(Letters letter) {
 
         Response responseSendMessage =
                 given()
+                        .baseUri(BASE_URI)
+                        .basePath(BASE_PATH)
                         .contentType("application/x-www-form-urlencoded; charset=UTF-8")
-                        .cookies(cookies)
+                        .cookies(cookiesAuto)
                         .formParam("current_folder", "6")
                         .formParam("from_mailbox", testData.getLoginMail() + "@yandex.ru")
                         .formParam("send", "<div>" + letter.getContext() + "</div>")
@@ -86,26 +127,11 @@ public class MethodsForApi {
                         .formParam("_ckey", ckey)
                         .formParam("ttype", "html")
                         .when()
-                        .post("https://mail.yandex.ru/web-api/do-send/liza1?_send=true");
-        assertTrue(responseSendMessage.getStatusCode() == 200,
+                        .post("/do-send/liza1?_send=true");
+        assertEquals(responseSendMessage.getStatusCode(), 200,
                 "Ожидаемый статус код 200, пришел - " + responseSendMessage.getStatusCode());
         String status = responseSendMessage.getBody().jsonPath().getJsonObject("status");
-        assertTrue(status.equals("ok"), "Статус должен соответствовать ok");
+        assertEquals(status,"ok", "Статус должен соответствовать ok");
         return responseSendMessage;
-    }
-
-    @Step("мой вспомогательный метод чтение json из файла локально, потом убрать")
-    public ArrayList<MessageModels> getMessageListFromFile() {
-        ArrayList<MessageModels> message = null;
-        try (FileReader reader = new FileReader("jsonka")) {
-            ObjectMapper mapper = new ObjectMapper();
-            Root root = mapper.readValue(reader, Root.class);
-            message = root.getModels().get(0).getData().getMessage();
-            assertTrue(message.size() > 0, "Присутствуют сообщения в списке");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return message;
-
     }
 }

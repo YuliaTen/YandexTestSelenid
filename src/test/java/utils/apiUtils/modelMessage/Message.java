@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MessageModels {
+public class Message {
     private String fid;
     @JsonProperty("firstline")
     private String firstLine;
@@ -17,7 +17,7 @@ public class MessageModels {
 
     @Override
     public String toString() {
-        return "MessageModels{" +
+        return "Message{" +
                 "fid='" + fid + '\'' +
                 ", firstLine='" + firstLine + '\'' +
                 ", subject='" + subject + '\'' +

@@ -37,7 +37,7 @@ public class JsonRequestMessageClass {
     }
 
 
-    private class Model {
+    private static class Model {
         @JsonProperty
         String name;
         @JsonProperty
@@ -52,7 +52,7 @@ public class JsonRequestMessageClass {
         }
     }
 
-    private class Params {
+    private static class Params {
         @JsonProperty
         String current_folder;
         @JsonProperty
