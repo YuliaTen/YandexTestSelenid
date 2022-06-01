@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>yandexTest</artifactId>
+        <groupId>yulia.ipr</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>yulia.ipr</groupId>
-    <artifactId>yandexTest</artifactId>
-    <packaging>pom</packaging>
+
+    <artifactId>moduleUi</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>moduleApi</module>
-        <module>moduleUi</module>
-        <module>moduleUtils</module>
-    </modules>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,40 +22,24 @@
         <aspectj.version>1.8.10</aspectj.version>
         <allure-junit5.version>2.17.3</allure-junit5.version>
         <allure-maven.version>2.10.0</allure-maven.version>
-        <rest-assured.version>5.0.1</rest-assured.version>
         <selenide.version>6.1.1</selenide.version>
         <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
-        <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
-        <json-simple.version>1.1.1</json-simple.version>
-        <jsoup.version>1.14.3</jsoup.version>
-        <jackson-databind.version>2.13.2.2</jackson-databind.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>yulia.ipr</groupId>
+            <artifactId>moduleUtils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
             <version>1.7.13</version>
         </dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-connector-java.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>${rest-assured.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>${json-simple.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>com.codeborne</groupId>
@@ -85,23 +69,7 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-rest-assured</artifactId>
-            <version>${allure-junit5.version}</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>${jsoup.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson-databind.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -123,15 +91,15 @@
                         </property>
                         <property>
                             <name>allure.results.directory</name>
-                            <value>target/allure-results</value>
+                            <value>${project.build.directory}/allure-results</value>
                         </property>
                     </systemProperties>
                 </configuration>
                 <dependencies>
                     <dependency>
-                         <groupId>org.aspectj</groupId>
-                         <artifactId>aspectjweaver</artifactId>
-                         <version>${aspectj.version}</version>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -147,4 +115,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
