@@ -1,10 +1,8 @@
 package apiTest;
 
-import apiUtils.AutorizationYandexApi;
 import apiUtils.MethodsForYandexMailApi;
 import apiUtils.modelMessage.Message;
 import io.qameta.allure.Step;
-import io.restassured.http.Cookies;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +11,6 @@ import utils.DBConnect;
 import utils.Letters;
 import utils.TestData;
 import utils.User;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,22 +20,17 @@ import static utils.TestData.dateTime;
 @DisplayName("API тесты для проверки работы Яндекс почты")
 class YandexApiTest {
     private static MethodsForYandexMailApi methods = new MethodsForYandexMailApi();
-    private static AutorizationYandexApi auto = new AutorizationYandexApi();
     private static TestData testData = new TestData();
     private static Response responseMail;
-    private static Cookies cookiesAuto;
     private static User user;
-    private DBConnect dbConnect = new DBConnect();
-    private Letters letter = dbConnect.getDataLetter();
+    private Letters letter = (new DBConnect()).getDataLetter();
     private String topicDate;
-
 
     @BeforeAll
     @DisplayName("Авторизация и сохранение необходимых данных, для уменьшения количества запросов к сайту")
     static void setUP() {
         user = new User(testData.getLoginMail(), testData.getPasswordMail(), testData.getControlAnswer());
-        cookiesAuto = auto.getAutorizationCookies(user);
-        responseMail = methods.loginMail(cookiesAuto);
+        responseMail = methods.loginMail(user);
     }
 
     @Test
@@ -52,15 +44,15 @@ class YandexApiTest {
     @Test
     @DisplayName("Проверяем наличие списка входящих сообщений")
     void testVisibleLetters() {
-        List<Message> message = methods.getMessageList("1", cookiesAuto);
+        List<Message> message = methods.getMessageList("1");
         assertTrue(message.size() > 0, "Входящие сообщения отсутствуют");
     }
 
     @Test
     @DisplayName("Отправка письма другому человеку")
     void testSendEmail() {
-        methodSend(letter.getReciver());
-        List<Message> message = methods.getMessageList("4", cookiesAuto);
+        sendLetter(letter.getReciver());
+        List<Message> message = methods.getMessageList("4");
         assertTrue(message.size() > 0, "Отправленные сообщения отсутствуют");
         //  проверить что нужное письмо присутствует в ответе
         assertTrue(message.stream().anyMatch(m -> m.getSubject().equalsIgnoreCase(topicDate)), "Письма с такой темой нет");
@@ -69,17 +61,17 @@ class YandexApiTest {
     @Test
     @DisplayName("Отправка письма себе")
     void testSendMySelfEmail() {
-        methodSend(user.getLogin() + "@yandex.ru");
-        List<Message> message = methods.getMessageList("1", cookiesAuto);
+        sendLetter(user.getLogin() + "@yandex.ru");
+        List<Message> message = methods.getMessageList("1");
         assertTrue(message.size() > 0, "Входящие сообщения отсутствуют");
         //  проверить что нужное письмо присутствует в ответе
         assertTrue(message.stream().anyMatch(m -> m.getSubject().equalsIgnoreCase(topicDate)), "Письма с такой темой нет");
     }
 
     @Step("отправить письмо")
-    void methodSend(String reciver) {
+    void sendLetter(String reciver) {
         topicDate = letter.getSubject() + " " + dateTime();
         Letters letterNew = new Letters(topicDate, letter.getContext(), reciver);
-        methods.getSendMessageAnswer(letterNew, cookiesAuto, user);
+        methods.getSendMessageAnswer(letterNew,  user);
     }
 }

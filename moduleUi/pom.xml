@@ -14,18 +14,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
-        <aspectj.version>1.8.10</aspectj.version>
-        <allure-junit5.version>2.17.3</allure-junit5.version>
-        <allure-maven.version>2.10.0</allure-maven.version>
-        <selenide.version>6.1.1</selenide.version>
-        <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
-    </properties>
-
     <dependencies>
 
         <dependency>

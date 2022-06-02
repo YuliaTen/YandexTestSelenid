@@ -1,6 +1,7 @@
 package apiUtils;
 
 import apiUtils.modelMessage.Message;
+import apiUtils.modelMessage.RootMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Step;
@@ -10,32 +11,34 @@ import io.restassured.response.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.junit.Assert;
 import utils.Letters;
-import apiUtils.modelMessage.RootMessage;
 import utils.User;
 import java.util.List;
 
 import static apiUtils.JsonRequestMessageClass.getJsonClass;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // класс хранит методы для упрощения работы с АПИ
 public class MethodsForYandexMailApi {
     private final String BASE_PATH = "web-api";
     private final String BASE_URI = "https://mail.yandex.ru/";
     private String ckey;
+    private Cookies cookiesAuto;
 
     @Step("Залогиниться в почте")
-    public Response loginMail(Cookies cookiesAuto){
-        Response responseMail = getMailAnswer(cookiesAuto);
+    public Response loginMail(User user){
+        AutorizationYandexApi auto = new AutorizationYandexApi();
+        cookiesAuto = auto.getAutorizationCookies(user);
+        Response responseMail = getMailAnswer();
         ckey = getDataFromResponseHTML(responseMail, "name", "_ckey");
         return responseMail;
     }
 
     @Step("получаем ответ после обращения к главной странице почты")
-    public Response getMailAnswer(Cookies cookies) {
+    public Response getMailAnswer() {
         return
                 RestAssured.given()
-                        .cookies(cookies)
+                        .cookies(cookiesAuto)
                         .when()
                         .get(BASE_URI);
     }
@@ -60,7 +63,7 @@ public class MethodsForYandexMailApi {
     }
 
     @Step("получаем лист с сообщениями")
-    public List<Message> getMessageList(String numberFolder, Cookies cookiesAuto) {
+    public List<Message> getMessageList(String numberFolder) {
         String json = getJsonStringForRequest(numberFolder);
         Response responseMessage =
                 RestAssured.given()
@@ -77,7 +80,7 @@ public class MethodsForYandexMailApi {
 
 
     @Step("получаем сообщения")
-    public Response getSendMessageAnswer(Letters letter, Cookies cookiesAuto, User user) {
+    public Response getSendMessageAnswer(Letters letter, User user) {
 
         Response responseSendMessage =
                 RestAssured.given()
@@ -94,10 +97,11 @@ public class MethodsForYandexMailApi {
                         .formParam("ttype", "html")
                         .when()
                         .post("/do-send/liza1?_send=true");
-        Assert.assertEquals("Ожидаемый статус код 200, пришел - " + responseSendMessage.getStatusCode(),
-                200, responseSendMessage.getStatusCode());
+
+        assertEquals(200, responseSendMessage.getStatusCode(),
+                "Ожидаемый статус код 200, пришел - " + responseSendMessage.getStatusCode());
         String status = responseSendMessage.getBody().jsonPath().getJsonObject("status");
-        Assert.assertEquals("Статус должен соответствовать ok","ok", status);
+        assertEquals("ok", status, "Статус должен соответствовать ok");
         return responseSendMessage;
     }
 }

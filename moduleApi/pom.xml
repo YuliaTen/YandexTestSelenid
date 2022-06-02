@@ -13,23 +13,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
-        <aspectj.version>1.8.10</aspectj.version>
-        <allure-junit5.version>2.17.3</allure-junit5.version>
-        <allure-maven.version>2.10.0</allure-maven.version>
-        <rest-assured.version>5.0.1</rest-assured.version>
-        <selenide.version>6.1.1</selenide.version>
-        <junit-jupiter-api.version>5.8.2</junit-jupiter-api.version>
-        <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
-        <json-simple.version>1.1.1</json-simple.version>
-        <jsoup.version>1.14.3</jsoup.version>
-        <jackson-databind.version>2.13.2.2</jackson-databind.version>
-    </properties>
-
     <dependencies>
 
         <dependency>
@@ -55,12 +38,6 @@
             <artifactId>rest-assured</artifactId>
             <version>${rest-assured.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>${json-simple.version}</version>
         </dependency>
 
         <dependency>
@@ -112,6 +89,12 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>5.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

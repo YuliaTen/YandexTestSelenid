@@ -9,7 +9,7 @@
 * тема письма (Subject);
 * письмо-контакт (Letter_Contact);
 
-[ER-диаграмма](.\moduleUtils\src\main\resources\modelER.png)
+[ER-диаграмма](.\image\modelER.png)
 
 #### Заполнить данными БД
 
