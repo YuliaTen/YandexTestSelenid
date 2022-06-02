@@ -13,7 +13,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -52,7 +51,6 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
             <version>${allure-junit5.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
