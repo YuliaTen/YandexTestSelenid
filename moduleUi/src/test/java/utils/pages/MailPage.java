@@ -1,4 +1,4 @@
-package pages;
+package utils.pages;
 
 import utils.Letters;
 import com.codeborne.selenide.ElementsCollection;

@@ -8,12 +8,13 @@ import java.time.format.DateTimeFormatter;
 public class TestData {
     private String loginMail = MyBase64.decode(ConfProperties.getProperty("LOGIN"));
     private String passwordMail = MyBase64.decode(ConfProperties.getProperty("PASS"));
+    private String controlAnswer = MyBase64.decode(ConfProperties.getProperty("CONTROLANSWER"));
     private String startURL = "https://mail.yandex.ru/";
 
+    public String getControlAnswer() {return controlAnswer;}
+
     @Step("Получение логина")
-    public String getLoginMail() {
-        return loginMail;
-    }
+    public String getLoginMail() {return loginMail;}
 
     public String getPasswordMail() {
         return passwordMail;
@@ -24,7 +25,7 @@ public class TestData {
     }
 
     @Step("Получение текущей даты и времени")
-    public String dateTime() {
+    public static String dateTime() {
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String date = dateTime.format(formatter);
