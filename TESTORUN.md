@@ -7,4 +7,4 @@
 * mvn -pl moduleUi test -Dtest=YandexMailTest
 
 #### Для запуска тестов API ввести maven команду
-* mvn -pl moduleUi test -Dtest=YandexApiTest
+* mvn -pl moduleApi test -Dtest=YandexApiTest
